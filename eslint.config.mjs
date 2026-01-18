@@ -15,3 +15,4 @@ const eslintConfig = defineConfig([
 ]);
 
 export default eslintConfig;
+eslint.config.mjs

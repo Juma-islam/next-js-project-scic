@@ -1,9 +1,9 @@
-import { getItems } from "@/services/itemes.itemes";
+import { getItemsFromDB } from "@/services/itemsServer";
 import { ShopCard } from "../items/_componet/ShopCard";
 
 export default async function ShopPage({ searchParams }) {
   const getParams = await searchParams;
-  const items = await getItems({ ...getParams });
+  const items = await getItemsFromDB({ ...getParams });
 
   return (
     <div className="min-h-screen bg-gray-50">

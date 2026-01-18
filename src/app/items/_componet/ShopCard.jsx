@@ -1,3 +1,5 @@
+"use client";
+
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -61,9 +63,9 @@ export const ShopCard = ({item}) => {
                 </span>
             </div>
 
-            <Link href={`/items/${item._id}`} className="block">
-                {/* Image Section */}
-                <div className="relative h-64 bg-gray-100 overflow-hidden">
+            {/* Image Section - Clickable */}
+            <Link href={`/items/${item._id}`}>
+                <div className="relative h-64 bg-gray-100 overflow-hidden cursor-pointer">
                     <Image
                         src={item.image}
                         alt={item.name}
@@ -74,10 +76,16 @@ export const ShopCard = ({item}) => {
                     {/* Overlay on Hover */}
                     <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
                         <div className="flex space-x-3">
-                            <button className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors transform hover:scale-110">
+                            <button 
+                                className="w-12 h-12 bg-white rounded-full flex items-center justify-center hover:bg-gray-100 transition-colors transform hover:scale-110"
+                                onClick={(e) => e.preventDefault()}
+                            >
                                 <Eye size={20} className="text-gray-700" />
                             </button>
-                            <button className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors transform hover:scale-110">
+                            <button 
+                                className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors transform hover:scale-110"
+                                onClick={(e) => e.preventDefault()}
+                            >
                                 <ShoppingCart size={20} className="text-white" />
                             </button>
                         </div>
@@ -93,9 +101,11 @@ export const ShopCard = ({item}) => {
                         </div>
                     )}
                 </div>
+            </Link>
 
-                {/* Content Section */}
-                <div className="p-6">
+            {/* Content Section - Also Clickable */}
+            <Link href={`/items/${item._id}`}>
+                <div className="p-6 cursor-pointer">
                     {/* Category Badge */}
                     <div className="mb-3">
                         <span className={`inline-block bg-gradient-to-r ${getCategoryColor(item.category)} text-white px-3 py-1 rounded-full text-xs font-semibold`}>
@@ -145,9 +155,35 @@ export const ShopCard = ({item}) => {
                             <span className="text-sm">{item.stock}</span>
                         </div>
                     </div>
-                 
                 </div>
             </Link>
+
+            {/* Action Buttons - Not clickable for navigation */}
+            {/* <div className="px-6 pb-6">
+                <div className="flex space-x-2">
+                    <button 
+                        className="flex-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white py-2.5 px-4 rounded-xl font-semibold hover:from-blue-700 hover:to-blue-800 transition-all duration-200 flex items-center justify-center space-x-2 group-hover:shadow-lg"
+                        disabled={item.stock === 0}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            // Add to cart logic here
+                        }}
+                    >
+                        <ShoppingCart size={16} />
+                        <span>{item.stock === 0 ? 'Sold Out' : 'Add to Cart'}</span>
+                    </button>
+                    
+                    <button 
+                        className="w-12 h-10 border-2 border-gray-200 rounded-xl flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            // Add to wishlist logic here
+                        }}
+                    >
+                        <Heart size={16} />
+                    </button>
+                </div>
+            </div> */}
 
             {/* Discount Badge */}
             {item.price > 100 && (

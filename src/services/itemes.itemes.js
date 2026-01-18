@@ -2,17 +2,26 @@
 
 export const getItems = async (params = {}) => {
   try {
+    // For server-side rendering, we need to use absolute URL or direct database call
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : "http://localhost:3000";
+    
     const queryString = new URLSearchParams(params).toString();
-    const url = `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/items${queryString ? `?${queryString}` : ''}`;
+    const url = `${baseUrl}/api/items${queryString ? `?${queryString}` : ''}`;
     
     const res = await fetch(url, {
       next: {
         revalidate: 60,
       },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     
     if (!res.ok) {
-      throw new Error('Failed to fetch items');
+      console.error(`Failed to fetch items: ${res.status} ${res.statusText}`);
+      throw new Error(`Failed to fetch items: ${res.status}`);
     }
     
     const data = await res.json();
@@ -25,17 +34,25 @@ export const getItems = async (params = {}) => {
 
 export const getSingleItem = async (id) => {
   try {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}` 
+      : "http://localhost:3000";
+    
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"}/api/items/${id}`,
+      `${baseUrl}/api/items/${id}`,
       {
         next: {
           revalidate: 60,
+        },
+        headers: {
+          'Content-Type': 'application/json',
         },
       }
     );
     
     if (!res.ok) {
-      throw new Error('Failed to fetch item');
+      console.error(`Failed to fetch item: ${res.status} ${res.statusText}`);
+      throw new Error(`Failed to fetch item: ${res.status}`);
     }
     
     return res.json();
