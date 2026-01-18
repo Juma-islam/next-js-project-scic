@@ -76,7 +76,7 @@ export default function Navbar() {
               <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
                 <ShoppingBag className="w-5 h-5 text-white" />
               </div>
-              <span>ShopBD</span>
+              <span>ShopHub</span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -114,7 +114,7 @@ export default function Navbar() {
                 <div className="flex items-center space-x-3">
                   <Link
                     href="/add-item"
-                    className="flex items-center space-x-2 bg-green-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors"
+                    className="flex items-center space-x-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-green-700 transition-colors"
                   >
                     <Plus size={18} />
                     <span>Add Item</span>
