@@ -77,14 +77,14 @@ export default async function ItemDetailPage({ params }) {
                 </p>
               </div>
               
-              <div className="space-y-4">
+              {/* <div className="space-y-4">
                 <button className="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
                   Add to Cart
                 </button>
                 <button className="w-full bg-gray-200 text-gray-800 py-3 rounded-lg hover:bg-gray-300 transition font-semibold">
                   Add to Wishlist
                 </button>
-              </div>
+              </div> */}
               
               <div className="mt-8 border-t pt-6">
                 <h2 className="text-xl font-semibold text-gray-600 mb-4">Product Details</h2>

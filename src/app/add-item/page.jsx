@@ -98,7 +98,7 @@ export default function AddItemPage() {
       });
 
       if (res.ok) {
-        toast.success("Product added successfully! 🎉");
+        toast.success("Product added successfully!");
         router.push("/items");
       } else {
         toast.error("Failed to add product. Please try again.");
